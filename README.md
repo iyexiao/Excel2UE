@@ -1,8 +1,8 @@
 # Excel2UE
-export excel to UE4 cpp script and txt resources
+export excel to UE4 cpp script and txt resources,use in blueprint 
 
 # Node
-need python2.7 and install openpyxl setuptools xlrd p
+need python2.7 and install openpyxl setuptools xlrd plug-in
 
 ### excel2lua
 built in cmd 
