@@ -40,5 +40,5 @@ public:
     UFUNCTION(BlueprintCallable, Category = "DB")
     static FRole getRoleById(int32 _value);
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static TMap<FString,FRole> getAllRoleDB();
+    static TMap<int32,FRole> getAllRoleDB();
 };

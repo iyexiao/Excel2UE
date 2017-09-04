@@ -1,8 +1,8 @@
 
-#include "Godproj.h"
+#include "GodProj.h"
 #include "DB_Enemy.h"
 
-static TMap<FString,FEnemy> m_map;
+static TMap<int32,FEnemy> m_map;
 
 UDB_Role::UDB_Enemy()
 {
@@ -38,7 +38,7 @@ bool UDB_Enemy::loadData()
         else
             dbS.isLock = false;
 
-        m_map.Add(FString::FromInt(dbS.id), dbS);
+        m_map.Add(dbS.id, dbS);
 
     }
     return true;
@@ -48,7 +48,7 @@ FRole UDB_Enemy::getEnemyById(int32 _value);
 {
     return m_map.FindRef(_value);
 }
-TMap<FString,FEnemy> UDB_Enemy::getAllEnemyDB()()
+TMap<int32,FEnemy> UDB_Enemy::getAllEnemyDB()()
 {
     return m_map
 }

@@ -37,5 +37,5 @@ public:
     UFUNCTION(BlueprintCallable, Category = "DB")
     static FEquip getEquipById(int32 _value);
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static TMap<FString,FEquip> getAllEquipDB();
+    static TMap<int32,FEquip> getAllEquipDB();
 };

@@ -37,5 +37,5 @@ public:
     UFUNCTION(BlueprintCallable, Category = "DB")
     static FItem getItemById(int32 _value);
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static TMap<FString,FItem> getAllItemDB();
+    static TMap<int32,FItem> getAllItemDB();
 };

@@ -1,8 +1,8 @@
 
-#include "Godproj.h"
+#include "GodProj.h"
 #include "DB_Item.h"
 
-static TMap<FString,FItem> m_map;
+static TMap<int32,FItem> m_map;
 
 UDB_Role::UDB_Item()
 {
@@ -33,7 +33,7 @@ bool UDB_Item::loadData()
 
         dbS.itemInfo = *array[3];
 
-        m_map.Add(FString::FromInt(dbS.id), dbS);
+        m_map.Add(dbS.id, dbS);
 
     }
     return true;
@@ -43,7 +43,7 @@ FRole UDB_Item::getItemById(int32 _value);
 {
     return m_map.FindRef(_value);
 }
-TMap<FString,FItem> UDB_Item::getAllItemDB()()
+TMap<int32,FItem> UDB_Item::getAllItemDB()()
 {
     return m_map
 }

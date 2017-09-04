@@ -169,7 +169,7 @@ public:
     UFUNCTION(BlueprintCallable, Category = "DB")
     static F%s get%sBy%s(%s _value);
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static TMap<FString,F%s> getAll%sDB();
+    static TMap<%s,F%s> getAll%sDB();
 };
 '''
 
@@ -196,14 +196,14 @@ def writeToH(filePath,fileName,keyName,keyType):
                     key1 = keyName[i].capitalize()
                     ktype1 = cppType[j]
                 break
-    b = h3%(uName,cName,cName,cName,cName,cName,key1,ktype1,cName,cName)
+    b = h3%(uName,cName,cName,cName,cName,cName,key1,ktype1,ktype1,cName,cName)
 
     writeFile(filePath,(a+b))
 c1='''
 #include "%s.h"
 #include "DB_%s.h"
 
-static TMap<FString,F%s> m_map;
+static TMap<%s,F%s> m_map;
 
 UDB_Role::UDB_%s()
 {
@@ -244,10 +244,7 @@ c24='''
 c25='''
         dbS.%s = LoadClass<AActor>(NULL, *array[%s]);
 '''
-c31='''
-        m_map.Add(FString::FromInt(dbS.%s), dbS);
-'''
-c32='''
+c3='''
         m_map.Add(dbS.%s, dbS);
 '''
 c4='''
@@ -259,7 +256,7 @@ FRole UDB_%s::get%sBy%s(%s _value);
 {
     return m_map.FindRef(_value);
 }
-TMap<FString,F%s> UDB_%s::getAll%sDB()()
+TMap<%s,F%s> UDB_%s::getAll%sDB()()
 {
     return m_map
 }
@@ -276,7 +273,12 @@ def writeToCpp(filePath,fileName,keyName,keyType):
     if not os.path.exists(fDirPath):
         os.mkdir(fDirPath)
     filePath = os.path.join(fDirPath,"DB_%s.cpp" % (cName))
-    a = c1%(projName,cName,cName,cName,cName,cName,cName)
+
+    for j in range(len(dataType)):
+        if dataType[j] == keyType[0]:
+            ktype1 = cppType[j]
+            break
+    a = c1%(projName,cName,ktype1,cName,cName,cName,cName,cName)
     for i in range(len(keyType)):
         wType = keyType[i]
         for j in range(len(dataType)):
@@ -294,17 +296,14 @@ def writeToCpp(filePath,fileName,keyName,keyType):
                     a = a + (c25%(keyName[i],i))
                 if i == 0 :
                     key1 = keyName[i].capitalize()
-                    ktype1 = cppType[j]
-                    if j == 0:
-                        b = c31%(keyName[i])
-                    elif j == 2:
-                        b = c31%(keyName[i])
+                    if j == 0 or j == 2:
+                        b = c3%(keyName[i])
                     else:
                         print 'first row must be int or string'
                         sys.exit(1)
                 break
     a = a + b
-    a = a + (c4%(cName,cName,key1,ktype1,cName,cName,cName))
+    a = a + (c4%(cName,cName,key1,ktype1,ktype1,cName,cName,cName))
     writeFile(filePath,a)
 #拆分excel
 def parseExcel(filePath,fileName):

@@ -1,8 +1,8 @@
 
-#include "Godproj.h"
+#include "GodProj.h"
 #include "DB_Role.h"
 
-static TMap<FString,FRole> m_map;
+static TMap<int32,FRole> m_map;
 
 UDB_Role::UDB_Role()
 {
@@ -38,7 +38,7 @@ bool UDB_Role::loadData()
         else
             dbS.isLock = false;
 
-        m_map.Add(FString::FromInt(dbS.id), dbS);
+        m_map.Add(dbS.id, dbS);
 
     }
     return true;
@@ -48,7 +48,7 @@ FRole UDB_Role::getRoleById(int32 _value);
 {
     return m_map.FindRef(_value);
 }
-TMap<FString,FRole> UDB_Role::getAllRoleDB()()
+TMap<int32,FRole> UDB_Role::getAllRoleDB()()
 {
     return m_map
 }

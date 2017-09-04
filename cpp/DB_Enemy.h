@@ -40,5 +40,5 @@ public:
     UFUNCTION(BlueprintCallable, Category = "DB")
     static FEnemy getEnemyById(int32 _value);
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static TMap<FString,FEnemy> getAllEnemyDB();
+    static TMap<int32,FEnemy> getAllEnemyDB();
 };

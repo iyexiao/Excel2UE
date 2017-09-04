@@ -1,8 +1,8 @@
 
-#include "Godproj.h"
+#include "GodProj.h"
 #include "DB_Equip.h"
 
-static TMap<FString,FEquip> m_map;
+static TMap<int32,FEquip> m_map;
 
 UDB_Role::UDB_Equip()
 {
@@ -33,7 +33,7 @@ bool UDB_Equip::loadData()
 
         dbS.itemInfo = *array[3];
 
-        m_map.Add(FString::FromInt(dbS.id), dbS);
+        m_map.Add(dbS.id, dbS);
 
     }
     return true;
@@ -43,7 +43,7 @@ FRole UDB_Equip::getEquipById(int32 _value);
 {
     return m_map.FindRef(_value);
 }
-TMap<FString,FEquip> UDB_Equip::getAllEquipDB()()
+TMap<int32,FEquip> UDB_Equip::getAllEquipDB()()
 {
     return m_map
 }
