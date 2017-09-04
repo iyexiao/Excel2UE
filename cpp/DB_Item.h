@@ -11,7 +11,7 @@ public:
     FItem(){};
     
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DB")
-    int32 id;
+    FString id;
 
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "DB")
     int32 itemType;
@@ -35,7 +35,7 @@ public:
     bool loadData();
 
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static FItem getItemById(int32 _value);
+    static FItem getItemById(FString _value);
     UFUNCTION(BlueprintCallable, Category = "DB")
-    static TMap<int32,FItem> getAllItemDB();
+    static TMap<FString,FItem> getAllItemDB();
 };

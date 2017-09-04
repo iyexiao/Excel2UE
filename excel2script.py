@@ -93,12 +93,19 @@ def getDataByExcel(pTabData,pRow,tblKey):
 # 将excel行数据整理成txt
 def parseData(pData,pType):
     ret = ""
+    checkSame=set()
     # print pData
     # print pType
     for row in range(len(pData)):
         item=[]
         for col in range(len(pType)):
             tmp = pData[row][col]
+            if col == 0:
+                if tmp in checkSame:
+                    print '存在唯一key:'+tmp
+                    sys.exit(1)
+                else:
+                    checkSame.add(tmp)
             if tmp == None or tmp == '':
                 tmp = ''
             if pType[col] == dataType[0]:

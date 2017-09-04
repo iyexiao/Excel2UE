@@ -2,7 +2,7 @@
 #include "GodProj.h"
 #include "DB_Item.h"
 
-static TMap<int32,FItem> m_map;
+static TMap<FString,FItem> m_map;
 
 UDB_Role::UDB_Item()
 {
@@ -25,7 +25,7 @@ bool UDB_Item::loadData()
         aString.ParseIntoArray(array, TEXT(","), false);
         FItem dbS;
 
-        dbS.id = FCString::Atoi(*array[0]);
+        dbS.id = *array[0];
 
         dbS.itemType = FCString::Atoi(*array[1]);
 
@@ -39,11 +39,11 @@ bool UDB_Item::loadData()
     return true;
 }
 
-FRole UDB_Item::getItemById(int32 _value);
+FRole UDB_Item::getItemById(FString _value);
 {
     return m_map.FindRef(_value);
 }
-TMap<int32,FItem> UDB_Item::getAllItemDB()()
+TMap<FString,FItem> UDB_Item::getAllItemDB()()
 {
     return m_map
 }
